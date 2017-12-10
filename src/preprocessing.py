@@ -3,7 +3,7 @@ import string
 class Cleaner(object):
 
     def __init__(self, intab="", outtab="", table=None,
-                 lowercase=True, strip_chars=string.whitespace):
+                 lowercase=False, strip_chars=string.whitespace):
         self.intab = intab
         self.outtab = outtab
         self.lowercase = lowercase
@@ -39,6 +39,6 @@ class Cleaner(object):
         return text
 
 if __name__=='__main__':
-    text = "Hello World! #;.., \r\n"
-    cleaner = Cleaner(table='punctuation', intab='l', outtab='q')
-    print(cleaner(text))
+    text = "\t\r\n Hello World! #;.., \r\n "
+    cleaner = Cleaner(table='punctuation', intab='l', outtab='q', lowercase=True)
+    assert cleaner(text)=='heqqo worqd'
