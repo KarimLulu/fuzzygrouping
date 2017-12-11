@@ -1,4 +1,5 @@
 import string
+from collections import Mapping
 
 class Cleaner(object):
 
@@ -29,7 +30,13 @@ class Cleaner(object):
         elif isinstance(value, Mapping):
             self._table.update(value)
 
+    def make_text(self, text):
+        if not isinstance(text, (str, bytes)):
+            text = str(text)
+        return text
+
     def __call__(self, text):
+        text = self.make_text(text)
         if self.lowercase:
             text = text.lower()
         if self.translate:
